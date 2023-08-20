@@ -17,13 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-        Category::factory(6)->create();
-        $categories = Category::all();
-        Product::factory(30)->create()->each(function ($product) use ($categories) {
-            $product->categories()->attach(
-                $categories->random(rand(1, 3))->pluck('id')->toArray()
-            );
-        });
+        $this->call(CategorySeeder::class);
+        $this->call(ProductSeeder::class);
+//        Category::factory(6)->create();
+//        $categories = Category::all();
+//        Product::factory(30)->create()->each(function ($product) use ($categories) {
+//            $product->categories()->attach(
+//                $categories->random(rand(1, 3))->pluck('id')->toArray()
+//            );
+//        });
         User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
