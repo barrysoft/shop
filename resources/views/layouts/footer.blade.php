@@ -53,16 +53,16 @@
                             <h5 class="footer-links__title">Mon Compte</h5>
                             <ul class="footer-links__list">
                                 <li class="footer-links__item">
-                                    <a href="#" class="footer-links__link">Mon compte</a>
+                                    <a href="{{route('login')}}" class="footer-links__link">Mon compte</a>
                                 </li>
                                 <li class="footer-links__item">
-                                    <a href="#" class="footer-links__link">Voir le panier</a>
+                                    <a href="{{route('cart')}}" class="footer-links__link">Voir le panier</a>
                                 </li>
                                 <li class="footer-links__item">
-                                    <a href="#" class="footer-links__link">Suivre ma commande</a>
+                                    <a href="{{route('checkout')}}" class="footer-links__link">Suivre ma commande</a>
                                 </li>
                                 <li class="footer-links__item">
-                                    <a href="#" class="footer-links__link">Commande</a>
+                                    <a href="{{route('dashboard')}}" class="footer-links__link">Commande</a>
                                 </li>
                             </ul>
                         </div>
