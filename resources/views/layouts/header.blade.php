@@ -6,7 +6,7 @@
                 <div class="mobile-header__body">
                     <button class="mobile-header__menu-button">
                         <svg width="18px" height="14px">
-                            <use xlink:href="{{('assets/images/sprite.svg')}}#menu-18x14"></use>
+                            <use xlink:href="{{asset('assets/images/sprite.svg')}}#menu-18x14"></use>
                         </svg>
                     </button>
                     <a class="mobile-header__logo" href="{{route('home')}}">
@@ -19,12 +19,12 @@
                                    autocomplete="off">
                             <button class="mobile-header__search-button mobile-header__search-button--submit" type="submit">
                                 <svg width="20px" height="20px">
-                                    <use xlink:href="{{('assets/images/sprite.svg')}}#search-20"></use>
+                                    <use xlink:href="{{asset('assets/images/sprite.svg')}}#search-20"></use>
                                 </svg>
                             </button>
                             <button class="mobile-header__search-button mobile-header__search-button--close" type="button">
                                 <svg width="20px" height="20px">
-                                    <use xlink:href="{{('assets/images/sprite.svg')}}#cross-20"></use>
+                                    <use xlink:href="{{asset('assets/images/sprite.svg')}}#cross-20"></use>
                                 </svg>
                             </button>
                             <div class="mobile-header__search-body"></div>
@@ -35,7 +35,7 @@
                             <button class="indicator__button">
                                 <span class="indicator__area">
                                     <svg width="20px" height="20px">
-                                        <use xlink:href="{{('assets/images/sprite.svg')}}#search-20"></use>
+                                        <use xlink:href="{{asset('assets/images/sprite.svg')}}#search-20"></use>
                                     </svg>
                                 </span>
                             </button>
@@ -44,7 +44,7 @@
                             <a href="wishlist.html" class="indicator__button">
                                 <span class="indicator__area">
                                     <svg width="20px" height="20px">
-                                        <use xlink:href="{{('assets/images/sprite.svg')}}#heart-20"></use>
+                                        <use xlink:href="{{asset('assets/images/sprite.svg')}}#heart-20"></use>
                                     </svg>
                                     <span class="indicator__value">0</span>
                                 </span>
@@ -54,7 +54,7 @@
                             <a href="{{ route('cart') }}" class="indicator__button">
                                 <span class="indicator__area">
                                     <svg width="20px" height="20px">
-                                        <use xlink:href="{{('assets/images/sprite.svg')}}#cart-20"></use>
+                                        <use xlink:href="{{asset('assets/images/sprite.svg')}}#cart-20"></use>
                                     </svg>
                                     <span class="indicator__value">{{Cart::count()}}</span>
                                 </span>
@@ -82,7 +82,7 @@
                             <button class="topbar-dropdown__btn" type="button">
                                 Mon compte
                                 <svg width="7px" height="5px">
-                                    <use xlink:href="{{('assets/images/sprite.svg')}}#arrow-rounded-down-7x5"></use>
+                                    <use xlink:href="{{asset('assets/images/sprite.svg')}}#arrow-rounded-down-7x5"></use>
                                 </svg>
                             </button>
                             <div class="topbar-dropdown__body">
@@ -120,7 +120,7 @@
                             <button class="topbar-dropdown__btn" type="button">
                                 Currency: <span class="topbar__item-value">USD</span>
                                 <svg width="7px" height="5px">
-                                    <use xlink:href="{{('assets/images/sprite.svg')}}#arrow-rounded-down-7x5"></use>
+                                    <use xlink:href="{{asset('assets/images/sprite.svg')}}#arrow-rounded-down-7x5"></use>
                                 </svg>
                             </button>
                             <div class="topbar-dropdown__body">
@@ -139,7 +139,7 @@
                             <button class="topbar-dropdown__btn" type="button">
                                 Language: <span class="topbar__item-value">EN</span>
                                 <svg width="7px" height="5px">
-                                    <use xlink:href="{{('assets/images/sprite.svg')}}#arrow-rounded-down-7x5"></use>
+                                    <use xlink:href="{{asset('assets/images/sprite.svg')}}#arrow-rounded-down-7x5"></use>
                                 </svg>
                             </button>
                             <div class="topbar-dropdown__body"><!-- .menu -->
@@ -176,7 +176,7 @@
                                autocomplete="off">
                         <button class="search__button" type="submit">
                             <svg width="20px" height="20px">
-                                <use xlink:href="{{('assets/images/sprite.svg')}}#search-20"></use>
+                                <use xlink:href="{{asset('assets/images/sprite.svg')}}#search-20"></use>
                             </svg>
                         </button>
                         <div class="search__border"></div>
@@ -212,11 +212,11 @@
                                 </div>
                                 <button class="departments__button">
                                     <svg class="departments__button-icon" width="18px" height="14px">
-                                        <use xlink:href="{{('assets/images/sprite.svg')}}#menu-18x14"></use>
+                                        <use xlink:href="{{asset('assets/images/sprite.svg')}}#menu-18x14"></use>
                                     </svg>
                                     Acheter Par Categorie
                                     <svg class="departments__button-arrow" width="9px" height="6px">
-                                        <use xlink:href="{{('assets/images/sprite.svg')}}#arrow-rounded-down-9x6"></use>
+                                        <use xlink:href="{{asset('assets/images/sprite.svg')}}#arrow-rounded-down-9x6"></use>
                                     </svg>
                                 </button>
                             </div>
@@ -234,7 +234,7 @@
                                 <a href="wishlist.html" class="indicator__button">
                                     <span class="indicator__area">
                                         <svg width="20px" height="20px">
-                                            <use xlink:href="{{('assets/images/sprite.svg')}}#heart-20"></use>
+                                            <use xlink:href="{{asset('assets/images/sprite.svg')}}#heart-20"></use>
                                         </svg>
                                         <span class="indicator__value">0</span>
                                     </span>
@@ -283,7 +283,7 @@
                                                             <input type="hidden" name="row_id" value="{{ $item->rowId }}">
                                                             <button type="submit" class="dropcart__product-remove btn btn-light btn-sm btn-svg-icon">
                                                                 <svg width="10px" height="10px">
-                                                                    <use xlink:href="{{('assets/images/sprite.svg')}}#cross-10"></use>
+                                                                    <use xlink:href="{{asset('assets/images/sprite.svg')}}#cross-10"></use>
                                                                 </svg>
                                                             </button>
                                                             {{--
