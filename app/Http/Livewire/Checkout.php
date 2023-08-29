@@ -17,7 +17,7 @@ class Checkout extends Component
 {
     public function stripeCheckout()
     {
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        \Stripe\Stripe::setApiKey(config('Services.stripe.secret'));
         $lineItems = [];
         foreach (Cart::content() as $item) {
             $lineItems[] = [
@@ -64,7 +64,7 @@ class Checkout extends Component
 
     public function success(Request $request, InvoiceService $invoiceService)
     {
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        \Stripe\Stripe::setApiKey(config('Services.stripe.secret'));
         $sessionId = $request->get('session_id');
 
         try {
