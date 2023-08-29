@@ -19,17 +19,17 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Customers';
+    protected static ?string $navigationGroup = 'Clients';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name')->label('Nom')
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->required(),
-                Forms\Components\TextInput::make('is_admin')
+                Forms\Components\TextInput::make('is_admin')->label('Admin')
                     ->required(),
             ]);
     }
@@ -38,11 +38,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->label('Nom')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
-                Tables\Columns\ToggleColumn::make('is_admin')->sortable(),
-                Tables\Columns\TextColumn::make('created_at')->sortable()->date('M d H:i'),
-                Tables\Columns\TextColumn::make('updated_at')->sortable()->date('M d H:i'),
+                Tables\Columns\ToggleColumn::make('is_admin')->label('Admin')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Date d\'ajout')->sortable()->date('d M H:i'),
+                Tables\Columns\TextColumn::make('updated_at')->label('Date de modif.')->sortable()->date('d M H:i'),
             ])
             ->filters([
                 //

@@ -143,12 +143,12 @@
                         </h4>
                     </td>
                     <td class="border-0 pl-0">
-                        @if($invoice->status)
+                        {{--@if($invoice->status)
                             <h4 class="text-uppercase cool-gray">
                                 <strong>{{ $invoice->status }}</strong>
                             </h4>
                         @endif
-                        <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+                        <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>--}}
                         <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
                     </td>
                 </tr>
@@ -283,7 +283,7 @@
                         <td class="text-center">{{ $item->units }}</td>
                     @endif
                     <td class="text-center">{{ $item->quantity }}</td>
-                    <td class="text-right">
+                    {{--<td class="text-right">
                         {{ $invoice->formatCurrency($item->price_per_unit) }}
                     </td>
                     @if($invoice->hasItemDiscount)
@@ -299,11 +299,11 @@
 
                     <td class="text-right pr-0">
                         {{ $invoice->formatCurrency($item->sub_total_price) }}
-                    </td>
+                    </td>--}}
                 </tr>
                 @endforeach
                 {{-- Summary --}}
-                @if($invoice->hasItemOrInvoiceDiscount())
+                {{--@if($invoice->hasItemOrInvoiceDiscount())
                     <tr>
                         <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
                         <td class="text-right pl-0">{{ __('invoices::invoice.total_discount') }}</td>
@@ -354,7 +354,7 @@
                         <td class="text-right pr-0 total-amount">
                             {{ $invoice->formatCurrency($invoice->total_amount) }}
                         </td>
-                    </tr>
+                    </tr>--}}
             </tbody>
         </table>
 

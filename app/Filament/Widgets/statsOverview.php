@@ -14,16 +14,16 @@ class statsOverview extends BaseWidget
         $totalSales = Order::where('status', 'completed')->sum('total');
         $totalSalesLast30Days = Order::where('status', 'completed')->where('created_at', '>=', now()->subDays(30))->sum('total');
         return [
-            Card::make('Last 30 Days', '$'.$totalSalesLast30Days)
-            ->description('Total sales for the last 30 days')
+            Card::make('Les 30 derniers jours', '$'.$totalSalesLast30Days)
+            ->description('Ventes totales des 30 derniers jours')
             ->color('success')
             ->icon('heroicon-o-currency-dollar'),
-            Card::make('Total Sales', '$'.$totalSales)
-            ->description('Total income from completed orders')
+            Card::make('Ventes totales', $totalSales.' GNF')
+            ->description('Revenu total des commandes terminées')
             ->color('success')
             ->icon('heroicon-o-currency-dollar'),
-            Card::make('Unshipped Orders', $unshippedOrders)
-              ->description('Orders that have not been shipped yet')
+            Card::make('Commandes non expédiées', $unshippedOrders)
+              ->description('Commandes qui n\'ont pas encore été expédiées')
               ->color('danger')
               ->icon('heroicon-o-inbox'),
         ];

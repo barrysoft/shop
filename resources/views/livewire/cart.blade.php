@@ -1,161 +1,165 @@
 <x-app-layout>
-    <section class="mt-50 mb-50">
-        <div class="container">
+    <div class="page-header">
+        <div class="page-header__container container">
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
                 </div>
             @endif
-            <div class="row">
-                <div class="col-12">
-                    <div class="table-responsive">
-                        <table class="table shopping-summery text-center clean">
-                            <thead>
-                                <tr class="main-heading">
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Subtotal</th>
-                                    <th scope="col">Remove</th>
-                                </tr>
-                            </thead>
-                            @if (Cart::count() > 0)
-                                <tbody>
-                                    @foreach (Cart::content() as $item)
-                                        <tr>
-                                            <td class="product-thumbnail ">
-                                                <a class="rounded-lg"
-                                                    href="{{ route('product.details', $item->model->id) }}">
-                                                    <img src="{{ asset('storage/' . $item->model->image) }}"
-                                                        alt="{{ $item->model->name }}"></a>
-                                            </td>
-                                            <td class="">
-                                                <h5 class="text-lg font-medium ">
-                                                    <a
-                                                        href="{{ route('product.details', $item->model->id) }}">{{ ucfirst($item->model->name) }}</a>
-                                                </h5>
-                                                <p class="font-xs">
-                                                    {{ $item->model->brief_description }}
-                                                </p>
-                                            </td>
-                                            <td class="price" data-title="Price"><span>${{ $item->model->price }}
-                                                </span></td>
-                                            <td class="text-center" data-title="Stock">
-                                                <div
-                                                    class="border rounded-md px-2 py-1 flex items-center justify-between">
-                                                    <span class="qty-val">{{ $item->qty }}</span>
-                                                    <div>
-                                                        <form action="{{ route('qty.up') }}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="row_id"
-                                                                value="{{ $item->rowId }}">
-                                                            <a class="qty-up" href=""
-                                                                onclick="event.preventDefault(); this.closest('form').submit()">
-                                                                <i class="fi-rs-angle-small-up"></i></a>
-                                                        </form>
-                                                        <form action="{{ route('qty.down') }}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="row_id"
-                                                                value="{{ $item->rowId }}">
-                                                            <a class="qty-down" href=""
-                                                                onclick="event.preventDefault(); this.closest('form').submit()">
-                                                                <i class="fi-rs-angle-small-down"></i></a>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-right" data-title="Cart">
-                                                <span>${{ $item->subtotal }} </span>
-                                            </td>
-                                            <td class="action" data-title="Remove">
-                                                <form action="{{ route('destroy.item') }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="row_id" value="{{ $item->rowId }}">
-                                                    <a onclick="event.preventDefault(); this.closest('form').submit()"
-                                                        class="text-muted"><i class="fi-rs-trash"></i></a>
-                                            </td>
-                                            </form>
-                                        </tr>
-                                    @endforeach
-                                    <tr>
-                                        <td colspan="6" class="text-end">
-                                            <form action="{{ route('destroy.cart') }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a onclick="event.preventDefault(); this.closest('form').submit()"
-                                                    class="text-muted">
-                                                    <i class="fi-rs-cross-small"></i>
-                                                    Clear Cart</a>
-                                            </form>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            @else
-                                <h1 class="text-xl font-bold pb-20">No item in cart</h1>
-                            @endif
-                        </table>
-                    </div>
-                    {{-- <div class="cart-action text-end">
-                        <a class="btn " href="{{ route('home') }}"><i class="fi-rs-shopping-bag mr-10"></i>Continue
-                            Shopping</a>
-                    </div> --}}
-                    @if (Cart::count() > 0)
-                        <div class="flex justify-center mb-50">
-                            <div class="w-100">
-                                <div class=" rounded-xl cart-totals">
-                                    <div class="mb-3">
-                                        <h1 class="font-bold text-lg tracking-widest text-orange-500 mb-2 uppercase">
-                                            Cart total</h1>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cart_total_label">Cart Subtotal</td>
-                                                    <td class="cart_total_amount"><span
-                                                            class="font-lg fw-900 text-brand">${{ Cart::subtotal() }}</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cart_total_label">Shipping</td>
-                                                    <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free
-                                                        Shipping</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cart_total_label">Tax</td>
-                                                    <td class="cart_total_amount">
-                                                        <i class="ti-gift mr-5"></i>
-                                                        <strong class="font-xl text-red-500">
-                                                            ${{ Cart::tax() }}
-                                                        </strong>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cart_total_label">Total</td>
-                                                    <td class="cart_total_amount">
-                                                        <strong><span class="font-xl fw-900 text-brand">
-                                                                ${{ Cart::total() }}
-                                                            </span></strong>
-                                                    </td>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="cart-action text-end">
-                                        <a href="{{ route('checkout') }}" class="btn"> <i
-                                                class="fi-rs-box-alt mr-10"></i>
-                                            Proceed to Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                @endif
+            {{--<div class="page-header__breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('home')}}">Home</a>
+                            <svg class="breadcrumb-arrow" height="9px" width="6px">
+                                <use xlink:href="{{asset('assets/images/sprite.svg')}}#arrow-rounded-right-6x9"></use>
+                            </svg>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Breadcrumb</a>
+                            <svg class="breadcrumb-arrow" height="9px" width="6px">
+                                <use xlink:href="{{asset('assets/images/sprite.svg')}}#arrow-rounded-right-6x9"></use>
+                            </svg>
+                        </li>
+                        <li aria-current="page" class="breadcrumb-item active">Shopping Cart</li>
+                    </ol>
+                </nav>
             </div>
+            <div class="page-header__title"><h1>Shopping Cart</h1></div>--}}
         </div>
-    </section>
+    </div>
+    <div class="cart block">
+        <div class="container">
+            <table class="cart__table cart-table">
+                <thead class="cart-table__head">
+                <tr class="cart-table__row">
+                    <th class="cart-table__column cart-table__column--image">Image</th>
+                    <th class="cart-table__column cart-table__column--product">Nom</th>
+                    <th class="cart-table__column cart-table__column--price">Prix</th>
+                    <th class="cart-table__column cart-table__column--quantity">Quantité</th>
+                    <th class="cart-table__column cart-table__column--total">Total</th>
+                    <th class="cart-table__column cart-table__column--remove"></th>
+                </tr>
+                </thead>
+                @if (Cart::count() > 0)
+                    <tbody class="cart-table__body">
+                    @foreach (Cart::content() as $item)
+                        <tr class="cart-table__row">
+                            <td class="cart-table__column cart-table__column--image">
+                                <a href="{{ route('product.details', $item->model->id) }}">
+                                    <img src="{{ asset('storage/' . $item->model->image) }}" alt="{{ $item->model->name }}">
+                                </a>
+                            </td>
+                            <td class="cart-table__column cart-table__column--product">
+                                <a class="cart-table__product-name" href="{{ route('product.details', $item->model->id) }}">
+                                    {{ ucfirst($item->model->name) }}
+                                </a>
+                                {{--
+                                <p class="font-xs">
+                                    {{ $item->model->brief_description }}
+                                </p>
+                                <ul class="cart-table__options">
+                                    <li>Color: Yellow</li>
+                                    <li>Material: Aluminium</li>
+                                </ul>
+                                --}}
+                            </td>
+                            <td class="cart-table__column cart-table__column--price" data-title="Price">
+                                {{--{{ $item->model->price }} GNF--}}
+                            </td>
+                            <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
+                                <div>
+                                    <form action="{{ route('qty.up') }}" method="post" id="qtyUp">
+                                        @csrf
+                                        <input type="hidden" name="row_id" value="{{ $item->rowId }}">
+                                    </form>
+                                    <form action="{{ route('qty.down') }}" method="post" id="qtyDown">
+                                        @csrf
+                                        <input type="hidden" name="row_id" value="{{ $item->rowId }}">
+                                    </form>
+                                </div>
+                                {{ $item->quantity }}
+                                <div class="input-number">
+                                    <input class="form-control input-number__input" min="1" type="number" value="{{ $item->qty }}">
+                                    <div class="input-number__add" onclick="document.getElementById('qtyUp').submit();"></div>
+                                    <div class="input-number__sub" onclick="document.getElementById('qtyDown').submit();"></div>
+                                </div>
+                            </td>
+                            <td class="cart-table__column cart-table__column--total" data-title="Total">
+                                {{--{{ $item->subtotal }} GNF--}}
+                            </td>
+                            <td class="cart-table__column cart-table__column--remove">
+                                <form action="{{ route('destroy.item') }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="row_id" value="{{ $item->rowId }}">
+                                    <button class="btn btn-light btn-sm btn-svg-icon" type="submit">
+                                        <svg height="12px" width="12px">
+                                            <use xlink:href="{{asset('assets/images/sprite.svg')}}#cross-12"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                @else
+                    <h1 class="text-xl font-bold pb-20">Aucun article dans le panier</h1>
+                @endif
+            </table>
+            <div class="cart__actions">
+                <form class="cart__coupon-form" action="{{ route('destroy.cart') }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    {{--<label class="sr-only" for="input-coupon-code">Password</label>
+                    <input class="form-control" id="input-coupon-code" placeholder="Coupon Code" type="text">--}}
+                    <button class="btn btn-danger" type="submit">Vider le panier</button>
+                </form>
+                <div class="cart__buttons">
+                    <a class="btn btn-light" href="{{route('home')}}">Continuer a acheter</a>
+                    {{--<a class="btn btn-primary cart__update-button" href="#">Update Cart</a>--}}
+                </div>
+            </div>
+            @if (Cart::count() > 0)
+            <div class="row justify-content-end pt-5">
+                <div class="col-12 col-md-7 col-lg-6 col-xl-5">
+                    <div class="card">
+                        <div class="card-body"><h3 class="card-title">Totaux du panier</h3>
+                            <table class="cart__totals">
+                                <thead class="cart__totals-header">
+                                <tr>
+                                    <th>Sous-total</th>
+                                    <td>{{--{{ Cart::subtotal() }} GNF--}}</td>
+                                </tr>
+                                </thead>
+                                <tbody class="cart__totals-body">
+                                <tr>
+                                    <th>Frais de livraison</th>
+                                    <td>
+                                        <div class="cart__calc-shipping">
+                                            <a href="#">Livraison Gratuite</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Taxe</th>
+                                    <td>{{--{{ Cart::tax() }} GNF--}}</td>
+                                </tr>
+                                </tbody>
+                                <tfoot class="cart__totals-footer">
+                                <tr>
+                                    <th>Total</th>
+                                    <td>{{--{{ Cart::total() }} GNF--}}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <a class="btn btn-primary btn-xl btn-block cart__checkout-button" href="{{ route('checkout') }}">
+                                Passer à la caisse
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
 </x-app-layout>

@@ -23,7 +23,7 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'Shop';
+    protected static ?string $navigationGroup = 'Boutique';
 
     public static function form(Form $form): Form
     {
@@ -31,17 +31,17 @@ class OrderResource extends Resource
             ->schema([
                 Forms\Components\Select::make('status')
                     ->options([
-                        'pending' => 'Pending',
-                        'processing' => 'Processing',
-                        'completed' => 'Completed',
-                        'canceled' => 'Canceled',
+                        'pending' => 'En attente',
+                        'processing' => 'Traitement',
+                        'completed' => 'Terminé',
+                        'canceled' => 'Annulé',
                     ])
                     ->required(),
                 Forms\Components\Fieldset::make('user_id')
                     ->relationship('user')
-                    ->label('Customer')
+                    ->label('Client')
                     ->schema([
-                        Forms\Components\TextInput::make('name')->disabled(),
+                        Forms\Components\TextInput::make('name')->label('Nom')->disabled(),
                         Forms\Components\TextInput::make('email')->disabled(),
                     ]),
             ]);
@@ -51,16 +51,16 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.id')->searchable()->label('Customer id'),
-                Tables\Columns\TextColumn::make('user.name')->searchable()->label('Customer name'),
-                Tables\Columns\TextColumn::make('user.email')->searchable()->label('Customer Email')->sortable(),
+                Tables\Columns\TextColumn::make('user.id')->searchable()->label('N ° de client'),
+                Tables\Columns\TextColumn::make('user.name')->searchable()->label('Nom du client'),
+                Tables\Columns\TextColumn::make('user.email')->searchable()->label('Email client')->sortable(),
                 Tables\Columns\BadgeColumn::make('status')
-                    ->label('Order status')
+                    ->label('Statut de la commande')
                     ->enum([
-                        'pending' => 'Pending',
-                        'processing' => 'Processing',
-                        'completed' => 'Completed',
-                        'canceled' => 'Canceled',
+                        'pending' => 'En attente',
+                        'processing' => 'Traitement',
+                        'completed' => 'Terminé',
+                        'canceled' => 'Annulé',
                     ])
                     ->colors([
                         'secondary' => 'pending',
@@ -69,9 +69,9 @@ class OrderResource extends Resource
                         'danger' => 'canceled',
                     ])
                     ->sortable(),
-                Tables\Columns\TextColumn::make('total')->prefix('$')->sortable(),
-                Tables\Columns\TextColumn::make('created_at')->sortable()->date('M d H:i'),
-                Tables\Columns\TextColumn::make('updated_at')->sortable()->date('M d H:i'),
+                Tables\Columns\TextColumn::make('total')->suffix('GNF')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Date d\'ajout')->sortable()->date('d M H:i'),
+                Tables\Columns\TextColumn::make('updated_at')->label('Date de modif.')->sortable()->date('d M H:i'),
             ])
             ->filters([
                 //
@@ -81,10 +81,10 @@ class OrderResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+                FilamentExportBulkAction::make('export')->label('Exporter'),
             ])
             ->headerActions([
-                FilamentExportHeaderAction::make('export')
+                FilamentExportHeaderAction::make('export')->label('Exporter')
             ]);
     }
 

@@ -65,12 +65,12 @@ class Home extends Component
         $search = $request->input('search');
         $priceFilter = $request->input('range');
         $products = $this->getProducts($sort, $selectedCategory, $search, $priceFilter);
-        $categories = Category::all();
+//        $categories = Category::all();
         return view('livewire.home', [
             'products' => $products,
             'sort' => $sort,
-            'selectedCategory' => $selectedCategory,
-            'categories' => $categories
+//            'selectedCategory' => $selectedCategory,
+//            'categories' => $categories
         ]);
     }
 }

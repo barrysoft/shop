@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('billing_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('country');
+            //$table->string('country');
             $table->string('billing_address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zipcode');
+            //$table->string('city');
+            //$table->string('state');
+            //$table->string('zipcode');
             $table->string('phone');
             $table->text('order_notes')->nullable();
             $table->timestamps();

@@ -20,7 +20,7 @@ class OrdersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('product')
+                Forms\Components\TextInput::make('product')->label('Produit')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -30,7 +30,7 @@ class OrdersRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product'),
+                Tables\Columns\TextColumn::make('product')->label('Produit'),
             ])
             ->filters([
                 //
@@ -45,5 +45,5 @@ class OrdersRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }

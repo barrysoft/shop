@@ -1,70 +1,122 @@
-<div class="divider"></div>
-<footer class="main px-10">
-    <section class="section-padding footer-mid">
-        <div class="container pt-15 pb-20">
-            <div class="row flex justify-between">
-                <div class="col-lg-4 col-md-6">
-                    <div class="widget-about font-md mb-md-5 mb-lg-0">
-                        <div class="logo logo-width-1 wow fadeIn animated">
-                            <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png')}}" style="height: 70px; width: 20px;" alt="logo"></a>
+<!-- site__footer -->
+<footer class="site__footer">
+    <div class="site-footer">
+        <div class="container">
+            <div class="site-footer__widgets">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="site-footer__widget footer-contacts">
+                            <h5 class="footer-contacts__title">Contactez Nous</h5>
+                            <div class="footer-contacts__text">
+                            </div>
+                            <ul class="footer-contacts__contacts">
+                                <li>
+                                    <i class="footer-contacts__icon fas fa-globe-americas"></i>
+                                    Nongo Conteyah
+                                </li>
+                                <li>
+                                    <i class="footer-contacts__icon far fa-envelope"></i>
+                                    sgiautomobiles@yahoo.fr
+                                </li>
+                                <li>
+                                    <i class="footer-contacts__icon fas fa-mobile-alt"></i>
+                                    +(224) 620-39-30-53 / 621-20-77-08
+                                </li>
+                                <li><i class="footer-contacts__icon far fa-clock"></i> Lun-Sam 8:30 - 17:30</li>
+                            </ul>
                         </div>
-                        <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
-                        <p class="wow fadeIn animated">
-                            <strong>Address: </strong>Tetouan Shore
-                        </p>
-                        <p class="wow fadeIn animated">
-                            <strong>Phone: </strong>+212 682860421
-                        </p>
-                        <p class="wow fadeIn animated">
-                            <strong>Email: </strong>yusufisawi@gmail.com
-                        </p>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="site-footer__widget footer-links"><h5 class="footer-links__title">
+                                Information</h5>
+                            <ul class="footer-links__list">
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">À propos de nous</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Informations de livraison</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Politique de confidentialité</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Termes & conditions Conditions</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Contactez-nous</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="site-footer__widget footer-links">
+                            <h5 class="footer-links__title">Mon Compte</h5>
+                            <ul class="footer-links__list">
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Mon compte</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Voir le panier</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Suivre ma commande</a>
+                                </li>
+                                <li class="footer-links__item">
+                                    <a href="#" class="footer-links__link">Commande</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-4">
+                        <div class="site-footer__widget footer-newsletter">
+                            <h5 class="footer-newsletter__title">Newsletter</h5>
+                            <div class="footer-newsletter__text">
+                            </div>
+                            <form action="#" class="footer-newsletter__form">
+                                <label class="sr-only" for="footer-newsletter-address">Adresse Email</label>
+                                <input type="text" class="footer-newsletter__form-input form-control"
+                                       id="footer-newsletter-address" placeholder="Email Address...">
+                                <button class="footer-newsletter__form-button btn btn-primary">S'abonner</button>
+                            </form>
+                            <div class="footer-newsletter__text footer-newsletter__text--social">
+                                Suivez-nous sur les réseaux sociaux
+                            </div>
+                            <ul class="footer-newsletter__social-links">
+                                <li class="footer-newsletter__social-link footer-newsletter__social-link--facebook">
+                                    <a href="https://themeforest.net/user/kos9" target="_blank">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="footer-newsletter__social-link footer-newsletter__social-link--twitter">
+                                    <a href="https://themeforest.net/user/kos9" target="_blank">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li class="footer-newsletter__social-link footer-newsletter__social-link--youtube">
+                                    <a href="https://themeforest.net/user/kos9" target="_blank">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li>
+                                <li class="footer-newsletter__social-link footer-newsletter__social-link--instagram">
+                                    <a href="https://themeforest.net/user/kos9" target="_blank">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
-                    <h5 class="widget-title wow fadeIn animated">About</h5>
-                    <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
+            </div>
+            <div class="site-footer__bottom">
+                {{--<div class="site-footer__copyright">
+                    <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
+                </div>--}}
+                <div class="site-footer__payments">
+                    <img src="{{asset('assets/images/payments.png')}}" alt="">
                 </div>
-                <div class="col-lg-2  col-md-3">
-                    <h5 class="widget-title wow fadeIn animated">My Account</h5>
-                    <ul class="footer-list wow fadeIn animated">
-                        <li><a href="my-account.html">My Account</a></li>
-                        <li><a href="#">View Cart</a></li>
-                        <li><a href="#">Track My Order</a></li>
-                        <li><a href="#">Order</a></li>
-                    </ul>
-                </div>
-
             </div>
         </div>
-    </section>
+    </div>
 </footer>
-<script src="{{ asset('assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/slick.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.syotimer.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/wow.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery-ui.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/perfect-scrollbar.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/magnific-popup.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/waypoints.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/counterup.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.countdown.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/images-loaded.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/isotope.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/scrollup.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.vticker-min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.theia.sticky.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.elevatezoom.js') }}"></script>
-<!-- Template JS -->
-<script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
-<script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>
+<!-- site__footer / end -->
 @stack('scripts')

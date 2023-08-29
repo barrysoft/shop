@@ -15,7 +15,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Checkout extends Component
 {
-
     public function stripeCheckout()
     {
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
@@ -86,7 +85,6 @@ class Checkout extends Component
             dd($e->getMessage());
             throw new NotFoundHttpException();
         }
-        return redirect()->route('home');
     }
 
     public function cancel()
@@ -94,15 +92,53 @@ class Checkout extends Component
         return redirect()->route('home')->with('success', 'Your order has been canceled.');
     }
 
-    public function makeOrder(Request $request)
+    public function saveOrder()
+    {
+        $lineItems = [];
+        foreach (Cart::content() as $item) {
+            $lineItems[] = [
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => $item->model->name,
+                    ],
+                    'unit_amount' => $item->model->price * 100,
+                ],
+                'quantity' => $item->qty,
+            ];
+        }
+
+        $total = str_replace(',', '', Cart::total());
+        $order = new Order([
+            'user_id' => Auth::user()->id,
+            'status' => 'processing',
+            'total' => $total,
+        ]);
+        $order->save();
+
+        foreach (Cart::content() as $item) {
+            $price = str_replace(',', '', $item->price);
+            $orderItem = new OrderItem([
+                'order_id' => $order->id,
+                'product_id' => $item->model->id,
+                'quantity' => $item->qty,
+                'price' => $price
+            ]);
+            $orderItem->save();
+        }
+
+        return $order;
+    }
+
+    public function makeOrder(Request $request, InvoiceService $invoiceService)
     {
         $validatedRequest = $request->validate([
-            'country' => 'required',
+            //'country' => 'required',
             'billing_address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
+            //'city' => 'required',
+            //'state' => 'required',
             'phone' => 'required',
-            'zipcode' => 'required|numeric',
+            //'zipcode' => 'required|numeric',
             'order_notes' => '',
         ]);
 
@@ -113,16 +149,25 @@ class Checkout extends Component
             $user->billingDetails()->update($validatedRequest);
         }
 
-        $sessionUrl = $this->stripeCheckout();
+        try {
+            $order = $this->saveOrder();
+            $customer = $user;
 
+            Mail::to('sgiautomobiles@yahoo.fr')->send(new OrderReceived($order, $invoiceService->createInvoice($order)));
+            Cart::destroy();
+            return view('livewire.success', compact('customer'));
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            throw new NotFoundHttpException();
+        }
 
-        return redirect($sessionUrl);
+        //return redirect()->route('checkout.success');
     }
 
     public function render()
     {
         if (Cart::count() <= 0) {
-            session()->flash('error', 'Your cart is empty.');
+            session()->flash('error', 'Votre panier est vide.');
             return redirect()->route('home');
         }
         $user = Auth::user();

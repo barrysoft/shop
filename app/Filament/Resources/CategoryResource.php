@@ -20,13 +20,13 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Shop';
+    protected static ?string $navigationGroup = 'Boutique';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name')->label('Nom')
                 ->reactive()
                 ->afterStateUpdated(function (Closure $set, $state) {
                     $set('slug', \Str::upper(\Str::slug($state)));
@@ -46,9 +46,9 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('created_at')->sortable()->date('d/m/Y H:i'),
-                Tables\Columns\TextColumn::make('updated_at')->sortable()->date('d/m/Y H:i'),
+                Tables\Columns\TextColumn::make('name')->label('Nom')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Date d\'ajout')->sortable()->date('d/m/Y H:i'),
+                Tables\Columns\TextColumn::make('updated_at')->label('Date de modif.')->sortable()->date('d/m/Y H:i'),
             ])
             ->filters([
                 //

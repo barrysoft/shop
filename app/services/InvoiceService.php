@@ -9,11 +9,11 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 class InvoiceService {
     public function createInvoice($order) {
         $client = new Party([
-            'name'          => 'Shopi',
+            'name'          => 'SGI Industrie',
             'custom_fields' => [
-                'seller'        => 'Youssef El Aissaoui',
-                'phone'         => '+(212) 682860421',
-                'email'         => 'yusufisawi@gmail.com',
+                'seller'        => 'SGI Industrie',
+                'phone'         => '+(224) 620393053/621207708',
+                'email'         => 'sgiautomobiles@yahoo.fr',
             ],
         ]);
 
@@ -32,20 +32,20 @@ class InvoiceService {
             $items[] = (new InvoiceItem())->title($item->product->name)->pricePerUnit($item->price)->quantity($item->quantity);
         }
 
-        $invoice = Invoice::make('receipt')
+        $invoice = Invoice::make('Commande')
         // ability to include translated invoice status
         // in case it was paid
-        ->status(__('invoices::invoice.paid'))
+        ->status(__('invoices::invoice.due'))
         ->sequence(667)
         ->serialNumberFormat('{SEQUENCE}/{SERIES}')
         ->series('BIG')
             ->seller($client)
             ->buyer($customer)
             ->date($order->created_at)
-            ->dateFormat('m/d/Y')
+            ->dateFormat('d/m/Y')
             ->payUntilDays(14)
-            ->currencySymbol('$')
-            ->currencyCode('USD')
+            ->currencySymbol('FG')
+            ->currencyCode('GNF')
             ->currencyFormat('{SYMBOL}{VALUE}')
             ->currencyThousandsSeparator('.')
             ->currencyDecimalPoint(',')

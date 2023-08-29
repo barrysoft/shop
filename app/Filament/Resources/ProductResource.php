@@ -36,35 +36,38 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
-    protected static ?string $navigationGroup = 'Shop';
+    protected static ?string $navigationGroup = 'Boutique';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nom')
                     ->required(),
-                Forms\Components\TextInput::make('SKU')
+                /*Forms\Components\TextInput::make('SKU')
                     ->helperText('SKU be like this SKU-####')
                     ->regex('/SKU-\d{4}/')
-                    ->required(),
+                    ->required(),*/
                 Forms\Components\TextInput::make('price')
+                    ->label('Prix')
                     ->numeric()
-                    ->prefix('$')
+                    ->suffix('GNF')
                     ->rules(['min:0'])
                     ->required(),
                 Forms\Components\TextInput::make('old_price')
+                    ->label('Ancien Prix')
                     ->numeric()
-                    ->prefix('$')
+                    ->suffix('GNF')
                     ->rules(['min:0'])
                     ->required(),
-                Forms\Components\TextInput::make('quantity')->numeric(),
+                Forms\Components\TextInput::make('quantity')->label('Quantité')->numeric(),
                 Forms\Components\TextInput::make('brief_description')
                     ->rules(['min:10', 'max:100'])
                     ->required(),
                 Forms\Components\Select::make('stock_status')->options([
-                    'instock' => 'In Stock',
-                    'outstock' => 'Out of Stock',
+                    'instock' => 'En stock',
+                    'outstock' => 'En rupture de stock',
                 ])
                     ->default('instock'),
                 Forms\Components\FileUpload::make('image')
@@ -73,7 +76,7 @@ class ProductResource extends Resource
                         $name = explode('.', $fileName);
                         return (string) str('images/products/main_image/' . $name[0] . '.' . $name[1]);
                     })
-                    ->label('Main Image')
+                    ->label('Image principale')
                     ->maxSize(3072)
                     ->image()
                     ->imageResizeMode('cover')
@@ -88,7 +91,7 @@ class ProductResource extends Resource
                         return (string) str('images/products/alt_images/' . $name[0] . '.' . $name[1]);
                     })
                     ->columnSpan('full')
-                    ->label('Alternate Images')
+                    ->label('Images alternatives')
                     ->maxSize(3072)
                     ->image()
                     ->imageResizeMode('cover')
@@ -124,16 +127,16 @@ class ProductResource extends Resource
     {
         return $table
             ->headerActions([
-                FilamentExportHeaderAction::make('export')
+                FilamentExportHeaderAction::make('export')->label('Exporter')
             ])
             ->columns([
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('SKU')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('price')->prefix('$')->sortable(),
-                Tables\Columns\TextColumn::make('quantity')->sortable(),
-                Tables\Columns\TextColumn::make('created_at')->sortable()->date('M d H:i'),
-                Tables\Columns\TextColumn::make('updated_at')->sortable()->date('M d H:i'),
+                Tables\Columns\TextColumn::make('name')->label('Nom')->searchable()->sortable(),
+                //Tables\Columns\TextColumn::make('SKU')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('price')->label('Prix')->suffix('GNF')->sortable(),
+                Tables\Columns\TextColumn::make('quantity')->label('Quantité')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Date d\'ajout')->sortable()->date('d M H:i'),
+                Tables\Columns\TextColumn::make('updated_at')->label('Date de modif.')->sortable()->date('d M H:i'),
             ])
             ->filters([
                 //
@@ -144,7 +147,7 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                FilamentExportBulkAction::make('export'),
+                FilamentExportBulkAction::make('export')->label('Exporter'),
             ]);
     }
 

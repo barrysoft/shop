@@ -21,30 +21,30 @@ class OrderItemResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
-    protected static ?string $navigationGroup = 'Shop';
+    protected static ?string $navigationGroup = 'Boutique';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Fieldset::make('product_id')
-                    ->label('Product information')
+                    ->label('Information produit')
                     ->relationship('product')
                     ->schema([
-                        Forms\Components\TextInput::make('name')->disabled(),
-                        Forms\Components\TextInput::make('SKU')->disabled(),
-                        Forms\Components\TextInput::make('quantity')->disabled(),
-                        Forms\Components\TextInput::make('price')->prefix('$')->disabled(),
+                        Forms\Components\TextInput::make('name')->name('Nom')->disabled(),
+                        //Forms\Components\TextInput::make('SKU')->disabled(),
+                        Forms\Components\TextInput::make('quantity')->label('Quantité')->disabled(),
+                        Forms\Components\TextInput::make('price')->label('Prix')->suffix('GNF')->disabled(),
                     ]),
                 Forms\Components\Fieldset::make('order_id')
                     ->relationship('order')
-                    ->label('Information about the order')
+                    ->label('Informations sur la commande')
                     ->schema([
                         Forms\Components\Fieldset::make('user_id')
-                            ->label('Buyer information')
+                            ->label('Informations sur l\'acheteur')
                             ->relationship('user')
                             ->schema([
-                                Forms\Components\TextInput::make('name')->disabled(),
+                                Forms\Components\TextInput::make('name')->label('Nom')->disabled(),
                                 Forms\Components\TextInput::make('email')->disabled(),
                             ]),
                     ])
@@ -56,17 +56,17 @@ class OrderItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('product.image')->searchable(),
-                Tables\Columns\TextColumn::make('product.SKU')->sortable(),
-                Tables\Columns\TextColumn::make('product.name')->sortable(),
-                Tables\Columns\TextColumn::make('quantity')->sortable(),
+                Tables\Columns\ImageColumn::make('product.image')->label('Image')->searchable(),
+                //Tables\Columns\TextColumn::make('product.SKU')->sortable(),
+                Tables\Columns\TextColumn::make('product.name')->label('Nom du produit')->sortable(),
+                Tables\Columns\TextColumn::make('quantity')->label('Quantité')->sortable(),
                 Tables\Columns\BadgeColumn::make('order.status')
-                    ->label('Order status')
+                    ->label('Statut de la commande')
                     ->enum([
-                        'pending' => 'Pending',
-                        'processing' => 'Processing',
-                        'completed' => 'Completed',
-                        'canceled' => 'Canceled',
+                        'pending' => 'En attente',
+                        'processing' => 'Traitement',
+                        'completed' => 'Terminé',
+                        'canceled' => 'Annulé',
                     ])
                     ->colors([
                         'secondary' => 'pending',
@@ -74,7 +74,7 @@ class OrderItemResource extends Resource
                         'success' => 'completed',
                         'danger' => 'canceled',
                     ])->sortable(),
-                Tables\Columns\TextColumn::make('price')->prefix('$')->sortable(),
+                Tables\Columns\TextColumn::make('price')->label('Prix')->suffix('GNF')->sortable(),
             ])
             ->filters([
                 //
@@ -85,10 +85,10 @@ class OrderItemResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                FilamentExportBulkAction::make('export'),
+                FilamentExportBulkAction::make('export')->label('Exporter'),
             ])
             ->headerActions([
-                FilamentExportHeaderAction::make('export')
+                FilamentExportHeaderAction::make('export')->label('Exporter')
             ]);
     }
 

@@ -21,7 +21,7 @@ class CategoriesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name')->label('Nom')
                     ->reactive()
                     ->afterStateUpdated(function (Closure $set, $state) {
                         $set('slug', \Str::upper(\Str::slug($state)));
@@ -41,7 +41,7 @@ class CategoriesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->label('Nom'),
                 Tables\Columns\TextColumn::make('slug'),
             ])
             ->filters([

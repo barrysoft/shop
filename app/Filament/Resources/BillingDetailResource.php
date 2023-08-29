@@ -21,7 +21,7 @@ class BillingDetailResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
 
-    protected static ?string $navigationGroup = 'Customers';
+    protected static ?string $navigationGroup = 'Clients';
 
     public static function form(Form $form): Form
     {
@@ -35,13 +35,13 @@ class BillingDetailResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('user.name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('user.email')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('phone')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('billing_address')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('city')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('country')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('user_id')->label('N° du client')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('user.name')->label('Nom du client')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('user.email')->label('Email du client')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('phone')->label('Téléphone')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('billing_address')->label('Adresse de facturation')->searchable()->sortable(),
+                //Tables\Columns\TextColumn::make('city')->searchable()->sortable(),
+                //Tables\Columns\TextColumn::make('country')->searchable()->sortable(),
             ])
             ->filters([
                 //
@@ -51,10 +51,10 @@ class BillingDetailResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                FilamentExportBulkAction::make('export'),
+                FilamentExportBulkAction::make('export')->label('Exporter'),
             ])
             ->headerActions([
-                FilamentExportHeaderAction::make('export')
+                FilamentExportHeaderAction::make('export')->label('Exporter')
             ]);
     }
 

@@ -20,7 +20,7 @@ class CategorySeeder extends Seeder
         foreach ($categories as $category) {
             Category::query()->create([
                 'id' => $category['id'],
-                'name' => $category['name'],
+                'name' => ucfirst(strtolower($category['name'])),
                 'slug' => Str::slug($category['name'])
             ]);
         }

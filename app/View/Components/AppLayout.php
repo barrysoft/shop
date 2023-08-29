@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Category;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
@@ -12,6 +13,11 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        $selectedCategory = request()->input('category');
+        $categories = Category::all();
+        return view('layouts.app', [
+            'selectedCategory' => $selectedCategory,
+            'categories' => $categories
+        ]);
     }
 }
